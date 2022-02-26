@@ -1,7 +1,8 @@
-package basic
+package impl
 
 import (
 	"fmt"
+	"github.com/luyu-fan/design-patterns-in-go/basic/interface"
 )
 
 // **********************************************************************************************
@@ -57,7 +58,7 @@ func (n *Nokia) SetPrice(p float64) {
 }
 
 // Deal 交易
-func (n *Nokia) Deal(b Buyer, s Seller) {
+func (n *Nokia) Deal(b _interface.Buyer, s _interface.Seller) {
 	s.Sell(n)
 	b.Buy(n)
 	fmt.Println("Nokia Deal finished!")
@@ -72,11 +73,11 @@ type ChineseCustomer struct {
 	money float64
 	rate  float64
 	name  string
-	goods []Goods
+	goods []_interface.Goods
 }
 
 // Buy 实现Buyer接口
-func (c *ChineseCustomer) Buy(g Goods) {
+func (c *ChineseCustomer) Buy(g _interface.Goods) {
 	fmt.Println("==============================================================================")
 	fmt.Printf("买家%s正在买入:\n", c.name)
 	g.Info()
@@ -93,11 +94,11 @@ func (c *ChineseCustomer) Buy(g Goods) {
 type UsaCustomer struct {
 	money float64
 	name  string
-	goods []Goods
+	goods []_interface.Goods
 }
 
 // Buy 实现Buyer接口
-func (u *UsaCustomer) Buy(g Goods) {
+func (u *UsaCustomer) Buy(g _interface.Goods) {
 	fmt.Println("==============================================================================")
 	fmt.Printf("Customer %s is purchasing:\n", u.name)
 	g.Info()
@@ -113,7 +114,7 @@ func (u *UsaCustomer) Buy(g Goods) {
 
 type BeijingDigitStore struct {
 	name     string
-	goods    []Goods
+	goods    []_interface.Goods
 	addr     string
 	turnover float64
 	tariff   float64
@@ -121,20 +122,20 @@ type BeijingDigitStore struct {
 
 type NewYorkDigitStore struct {
 	name     string
-	goods    []Goods
+	goods    []_interface.Goods
 	addr     string
 	turnover float64
 }
 
 // Sell 实现Seller接口
-func (b *BeijingDigitStore) Sell(g Goods) {
+func (b *BeijingDigitStore) Sell(g _interface.Goods) {
 	b.goods = b.goods[1:]
 	g.SetPrice(g.Price() + b.tariff)
 	b.turnover += g.Price()
 }
 
 // GetOne 实现Seller接口
-func (b *BeijingDigitStore) GetOne() Goods {
+func (b *BeijingDigitStore) GetOne() _interface.Goods {
 	if len(b.goods) > 0 {
 		return b.goods[0]
 	}
@@ -142,21 +143,21 @@ func (b *BeijingDigitStore) GetOne() Goods {
 }
 
 // Add 实现Seller接口
-func (b *BeijingDigitStore) Add(g Goods) {
+func (b *BeijingDigitStore) Add(g _interface.Goods) {
 	if b.goods == nil {
-		b.goods = make([]Goods, 0)
+		b.goods = make([]_interface.Goods, 0)
 	}
 	b.goods = append(b.goods, g)
 }
 
 // Sell 实现Seller接口
-func (n *NewYorkDigitStore) Sell(g Goods) {
+func (n *NewYorkDigitStore) Sell(g _interface.Goods) {
 	n.goods = n.goods[1:]
 	n.turnover += g.Price()
 }
 
 // GetOne 实现Seller接口
-func (n *NewYorkDigitStore) GetOne() Goods {
+func (n *NewYorkDigitStore) GetOne() _interface.Goods {
 	if len(n.goods) > 0 {
 		return n.goods[0]
 	}
@@ -164,9 +165,9 @@ func (n *NewYorkDigitStore) GetOne() Goods {
 }
 
 // Add 实现Seller接口
-func (n *NewYorkDigitStore) Add(g Goods) {
+func (n *NewYorkDigitStore) Add(g _interface.Goods) {
 	if n.goods == nil {
-		n.goods = make([]Goods, 0)
+		n.goods = make([]_interface.Goods, 0)
 	}
 	n.goods = append(n.goods, g)
 }

@@ -1,4 +1,4 @@
-package basic
+package _interface
 
 // Goods 通用商品接口
 type Goods interface {
