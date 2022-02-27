@@ -1,8 +1,12 @@
+/**
+简单接口的类实现
+*/
+
 package impl
 
 import (
 	"fmt"
-	"github.com/luyu-fan/design-patterns-in-go/basic/interface"
+	"github.com/luyu-fan/design-patterns-in-go/data/goods/interface"
 )
 
 // **********************************************************************************************
