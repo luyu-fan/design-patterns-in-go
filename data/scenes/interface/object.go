@@ -1,5 +1,5 @@
 package _interface
 
-type GameObject interface {
+type Object interface {
 	Info()
 }
